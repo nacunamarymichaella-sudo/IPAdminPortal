@@ -1,0 +1,482 @@
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+
+    margin: 0;
+
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
+
+    background: #f1f5f9;
+
+    color: #0f172a;
+
+}
+
+
+.layout {
+
+    min-height: 100vh;
+
+    display: flex;
+
+}
+
+
+.sidebar {
+
+    width: 250px;
+
+    background:
+        #0f172a;
+
+    color: white;
+
+    padding: 24px;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.sidebar-brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 40px;
+
+}
+
+
+.sidebar-logo {
+
+    width: 42px;
+
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #7c3aed
+        );
+
+    font-weight: 900;
+
+}
+
+
+.sidebar-brand small {
+
+    display: block;
+
+    color: #94a3b8;
+
+    margin-top: 2px;
+
+}
+
+
+nav {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
+
+
+nav a,
+.logout-link {
+
+    padding: 13px 14px;
+
+    border-radius: 10px;
+
+    color: #cbd5e1;
+
+    text-decoration: none;
+
+    transition: .2s;
+
+}
+
+
+nav a:hover,
+nav a.active {
+
+    background:
+        #1e293b;
+
+    color: white;
+
+}
+
+
+.sidebar-bottom {
+
+    margin-top: auto;
+
+}
+
+
+.logout-link:hover {
+
+    background: #7f1d1d;
+
+    color: white;
+
+}
+
+
+.main {
+
+    flex: 1;
+
+    padding: 28px;
+
+    overflow-x: auto;
+
+}
+
+.log-warning {
+
+    margin-bottom: 18px;
+
+    padding: 12px 16px;
+
+    border: 1px solid #fcd34d;
+
+    border-radius: 10px;
+
+    background: #fffbeb;
+
+    color: #92400e;
+
+    font-size: 14px;
+
+}
+
+
+.topbar {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 28px;
+
+}
+
+
+.topbar h1 {
+
+    margin: 0 0 5px;
+
+    font-size: 30px;
+
+}
+
+
+.topbar p {
+
+    margin: 0;
+
+    color: #64748b;
+
+}
+
+
+.profile {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+
+.profile small {
+
+    display: block;
+
+    color: #64748b;
+
+}
+
+
+.avatar {
+
+    width: 42px;
+
+    height: 42px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #dbeafe;
+
+    color: #1d4ed8;
+
+    font-weight: 800;
+
+}
+
+
+.cards {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 16px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.stat-card {
+
+    padding: 22px;
+
+    border-radius: 16px;
+
+    background: white;
+
+    box-shadow:
+        0 5px 20px
+        rgba(15,23,42,.06);
+
+}
+
+
+.stat-card span {
+
+    color: #64748b;
+
+    font-size: 13px;
+
+}
+
+
+.stat-card strong {
+
+    display: block;
+
+    margin-top: 10px;
+
+    font-size: 24px;
+
+}
+
+
+.stat-card small {
+
+    display: block;
+
+    margin-top: 6px;
+
+    color: #94a3b8;
+
+}
+
+
+.ip-text {
+
+    font-family: monospace;
+
+}
+
+
+.panel {
+
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 24px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(15,23,42,.06);
+
+}
+
+
+.panel-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+
+}
+
+
+.panel-header h2 {
+
+    margin: 0 0 5px;
+
+}
+
+
+.panel-header p {
+
+    margin: 0;
+
+    color: #64748b;
+
+}
+
+
+.primary-button {
+
+    padding: 11px 16px;
+
+    border-radius: 9px;
+
+    background: #2563eb;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-weight: 700;
+
+}
+
+
+.info-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+
+}
+
+
+.info-grid > div {
+
+    padding: 18px;
+
+    border-radius: 12px;
+
+    background: #f8fafc;
+
+}
+
+
+.info-grid span {
+
+    display: block;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+}
+
+
+.info-grid strong {
+
+    display: block;
+
+    margin-top: 6px;
+
+}
+
+
+@media(max-width:1000px) {
+
+    .cards {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media(max-width:700px) {
+
+    .layout {
+
+        display: block;
+
+    }
+
+
+    .sidebar {
+
+        width: 100%;
+
+    }
+
+
+    .cards {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .topbar {
+
+        display: block;
+
+    }
+
+
+    .profile {
+
+        margin-top: 15px;
+
+    }
+
+
+    .info-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+}
