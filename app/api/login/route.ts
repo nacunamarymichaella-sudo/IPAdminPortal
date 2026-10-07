@@ -66,12 +66,12 @@ export async function POST(request: NextRequest) {
     }
   }
 
-  let logWarning = "";
+  let logError = "";
   try {
     await writeLog({ ...details, status: valid ? "SUCCESS" : "FAILED" });
   } catch (error) {
     console.error("Unable to record login attempt:", error);
-    logWarning = "This login attempt could not be recorded.";
+    logError = "This login attempt could not be recorded.";
   }
 
   if (!valid) {
@@ -81,18 +81,24 @@ export async function POST(request: NextRequest) {
           ? "Please enter your username and password."
           : "Invalid username or password.",
     });
-    if (logWarning) params.set("warning", logWarning);
+    if (logError) params.set("warning", logError);
     return loginRedirect(request, `/?${params.toString()}`);
+  }
+
+  if (logError) {
+    return loginRedirect(
+      request,
+      `/?error=${encodeURIComponent(
+        "Unable to verify the login service. Please try again later.",
+      )}`,
+    );
   }
 
   if (!token) {
     throw new Error("Authenticated login is missing its signed session token.");
   }
 
-  const destination = logWarning
-    ? `/dashboard?warning=${encodeURIComponent(logWarning)}`
-    : "/dashboard";
-  const response = loginRedirect(request, destination);
+  const response = loginRedirect(request, "/dashboard");
   response.cookies.set(SESSION_COOKIE, token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
