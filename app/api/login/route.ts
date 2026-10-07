@@ -20,6 +20,18 @@ function loginRedirect(request: NextRequest, path: string) {
   return NextResponse.redirect(new URL(path, request.url), 303);
 }
 
+function loginFailureRedirect(request: NextRequest, path: string) {
+  const response = loginRedirect(request, path);
+  response.cookies.set(SESSION_COOKIE, "", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+    path: "/",
+    maxAge: 0,
+  });
+  return response;
+}
+
 export async function POST(request: NextRequest) {
   const form = await request.formData();
   const username = String(form.get("username") ?? "").trim();
@@ -29,7 +41,7 @@ export async function POST(request: NextRequest) {
 
   if (!adminUsername || !adminPassword) {
     console.error("Login is not configured: set ADMIN_USERNAME and ADMIN_PASSWORD.");
-    return loginRedirect(
+    return loginFailureRedirect(
       request,
       "/?error=Login%20is%20not%20configured.%20Set%20the%20admin%20environment%20variables.",
     );
@@ -59,7 +71,7 @@ export async function POST(request: NextRequest) {
       token = createSessionToken(adminUsername, loginTime);
     } catch (error) {
       console.error("Unable to create login session:", error);
-      return loginRedirect(
+      return loginFailureRedirect(
         request,
         "/?error=Login%20session%20is%20not%20configured.%20Set%20a%20valid%20SESSION_SECRET.",
       );
@@ -82,11 +94,11 @@ export async function POST(request: NextRequest) {
           : "Invalid username or password.",
     });
     if (logError) params.set("warning", logError);
-    return loginRedirect(request, `/?${params.toString()}`);
+    return loginFailureRedirect(request, `/?${params.toString()}`);
   }
 
   if (logError) {
-    return loginRedirect(
+    return loginFailureRedirect(
       request,
       `/?error=${encodeURIComponent(
         "Unable to verify the login service. Please try again later.",
